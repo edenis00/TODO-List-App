@@ -27,8 +27,8 @@
                 <input type="text"
                     class="w-full mt-2 rounded-md py-3 px-3 text-sm text-gray-900 dark:text-gray-100 dark:bg-gray-700"
                     placeholder="Type a new task" name="task_content" id="task_content">
+                <p class="text-xs hidden py-1 text-[red]" id="errormsg"></p>
             </div>
-            <p class="text-xs hidden py-1 text-[red]" id="errormsg"></p>
             <div class="flex justify-end">
                 <input type="submit" value="Add"
                     class="bg-slate-800 text-white dark:bg-white dark:text-slate-800 rounded-md px-6 py-2 mt-3 font-semibold cursor-pointer hover:bg-slate-700 dark:hover:bg-gray-300">
@@ -38,22 +38,26 @@
         <div
             class="w-full bg-slate-200 dark:bg-slate-700 rounded-lg px-3 py-4 h-40 max-h-40 overflow-auto scroll-smooth">
             {% for task in tasks %}
-            <div class="text-gray-900 dark:text-gray-100 flex justify-between items-center mb-1">
-                <input type="text" class="bg-transparent border-0 text-gray-900 dark:text-gray-100 input-no-outline"
+            <div class="text-gray-900 dark:text-gray-100 flex flex-col mb-1"">
+                <div class=" flex justify-between items-center">
+                <input type=" text"
+                    class="w-full bg-transparent border-0 text-gray-900 dark:text-gray-100 input-no-outline mr-1"
                     id="task-{{ task.id }}" value="{{ task.task }}" readonly>
-                <span class="text-xs">{{ task.date_created.strftime('%Y-%m-%d %H:%M:%S') }}</span>
-                <button onclick="editTask('{{task.id}}')" class="text-blue-500">
+                <span class="text-xs mx-2">{{ task.date_created.strftime('%Y-%m-%d %H:%M:%S') }}</span>
+                <button onclick="editTask('{{task.id}}')" class="text-blue-500 mx-1">
                     <i class="fas fa-edit"></i>
                 </button>
-                <button onclick="saveTask('{{task.id}}')" class="text-green-500 hidden">
+                <button onclick="saveTask('{{task.id}}')" class="text-green-500 hidden m-1">
                     <i class="fas fa-save"></i>
                 </button>
-                <button onclick="deleteTask('{{task.id}}')" class="text-red-500">
+                <button onclick="deleteTask('{{task.id}}')" class="text-red-500 m-1">
                     <i class="fas fa-trash"></i>
                 </button>
             </div>
-            {% endfor %}
+            <p class="text-xs hidden py-1 text-[red]" id="errormsg1"></p>
         </div>
+        {% endfor %}
+    </div>
     </div>
     <script src="{{ url_for('static', filename='js/form-handler.js') }}"></script>
 </body>
